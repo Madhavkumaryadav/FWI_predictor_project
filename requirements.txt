@@ -1,5 +1,5 @@
 Flask
-pickle
-numpy-2.3.4-cp314
-pandas-2.3.3-cp314
-scikit-learn-1.7.2-cp314
+numpy
+pandas
+scikit-learn
+gunicorn
