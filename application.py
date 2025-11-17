@@ -30,8 +30,8 @@ def predict_datapoint():
         result = ridge_model.predict(scaled)
 
         return render_template('home.html', results=float(result[0]))
-
-    return render_template('home.html')
+    else:
+        return render_template('home.html')
 
 if __name__ == "__main__":
     application.run(debug=True)
