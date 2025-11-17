@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction | Home</title>
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- BEAUTIFUL BACKGROUND -->
+    <style>
+        body {
+            background: linear-gradient(120deg, #1e1b4b, #0f172a, #1e3a8a);
+            background-size: cover;
+            min-height: 100vh;
+            color: white;
+        }
+        .glass-box {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .form-control {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .form-control::placeholder {
+            color: #cbd5e1;
+        }
+        .predict-btn {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            border: none;
+            padding: 10px 25px;
+            font-size: 18px;
+            border-radius: 10px;
+            color: black;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .predict-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px #38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <!-- PAGE TITLE -->
+        <h1 class="text-center fw-bold mb-4" style="color:#38bdf8;"> Fire Weather Index (FWI) Prediction</h1>
+
+        <!--GLASS FORM BOX -->
+        <div class="glass-box mx-auto" style="max-width: 650px;">
+            <h3 class="text-center mb-4">Enter Weather Details</h3>
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="Temperature" placeholder="Temperature (°C)" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="RH" placeholder="Relative Humidity (%)" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="Ws" placeholder="Wind Speed (km/h)" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="Rain" placeholder="Rain (mm)" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="FFMC" placeholder="FFMC" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="DMC" placeholder="DMC" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <input type="text" class="form-control" name="ISI" placeholder="ISI" required>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <input type="text" class="form-control" name="Classes" placeholder="Class" required>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <input type="text" class="form-control" name="Region" placeholder="Region" required>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="predict-btn" type="submit">Predict FWI</button>
+                </div>
+
+            </form>
+
+            <!-- RESULT -->
+            {% if results %}
+            <h3 class="text-center mt-4">
+                 Predicted FWI: <span style="color:#38bdf8;">{{ results }}</span>
+            </h3>
+            {% endif %}
+        </div>
+
+
+        <!-- ========================== ABOUT SECTION ========================== -->
+        <section class="mt-5">
+            <div class="glass-box">
+
+                <h2 class="text-center fw-bold mb-3" style="color:#38bdf8;">
+                     About This FWI Prediction Project
+                </h2>
+
+                <p class="text-light fs-5 text-center">
+                    This Fire Weather Index (FWI) Prediction System uses Machine Learning (Ridge Regression)
+                    to analyze environmental conditions and estimate the fire danger level.
+                </p>
+
+                <div class="row text-light mt-4">
+                    <div class="col-md-6">
+                        <h4 class="fw-bold" style="color:#f0abfc;">Used Algorithm </h4>
+                        <ul>
+                            <li>Ridge Regression based ML Model</li>
+                            <li>Weather & FWI component analysis</li>
+                            <li>Model Accuracy is 98 %</li>
+                            <li>Fast & real-time FWI prediction</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4 class="fw-bold" style="color:#f0abfc;">Attributes Of Dataset</h4>
+                        <ul>
+                            <li>Temperature, Humidity, Rain</li>
+                            <li>FFMC, DMC, DC, ISI, BUI</li>
+                            <li>FWI Range: 0 to 31.1</li>
+                            <li>Classes: Fire / Not Fire</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="mt-4" style="border-color: rgba(255,255,255,0.2);">
+
+                <div class="text-center text-light">
+                    <h4 class="fw-bold" style="color:#fb7185;">Created By</h4>
+                    <p class="m-0 fs-5"><strong>Madhav Kumar Yadav</strong></p>
+                    <p class="m-0">ML & Data Science Enthusiast</p>
+                    <p class="m-0">Email: ymadhav081@gmail.com</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-light py-3 mt-5"
+        style="background: linear-gradient(90deg, #1e1b4b, #0f172a, #1e3a8a);">
+        © 2025 FWI Prediction Project | Built by <span style="color:#38bdf8;">Madhav Yadav</span>
+    </footer>
+
+</body>
+</html>
