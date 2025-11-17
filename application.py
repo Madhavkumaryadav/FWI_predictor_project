@@ -3,8 +3,8 @@ import pickle
 import numpy as np
 import os
 
-app = Flask(__name__)
-
+application = Flask(__name__)
+app=application
 # Load model and scaler
 BASE = os.path.dirname(os.path.abspath(__file__))
 ridge_model = pickle.load(open(os.path.join(BASE, 'models/ridge.pkl'), 'rb'))
@@ -34,4 +34,4 @@ def predict_datapoint():
     return render_template('home.html')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
